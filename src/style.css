@@ -1,0 +1,222 @@
+@font-face {
+    font-family: Noto;
+    src: url(./fonts/Noto/NotoSansMono-VariableFont_wdth\,wght.ttf);
+    font-weight: 100 900;
+}
+@font-face {
+    font-family: REM;
+    src: url(./fonts/REM-VariableFont_wght.ttf);
+    font-weight: 100 900;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 1fr .25fr 1fr;
+}
+
+.page-top{
+    grid-row: 1/2;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 8fr 1fr .5fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.magnifying-glass{
+    color: #fff;
+    font-size: 2rem;
+    justify-self: end;
+    grid-column: 3/4;
+    margin-right: 1.75rem;
+}
+
+.weather-search{
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+#weather-search{
+    border-radius: 1rem;
+    border: none;
+    color: #000;
+    display: none;
+    justify-self: end;
+    align-self: center;
+    width: 15rem;
+    height: 1.5rem;
+    text-align: center;
+    animation-name: expand;
+    animation-duration: .2s;
+}
+@keyframes expand{
+    from{
+        width: 0rem;
+    }
+    to{
+        width: 15rem;
+    }
+}
+
+.logo{
+    color: #fff;
+    font-size: 3rem;
+    grid-column: 1/2;
+    margin-left: 1.5rem;
+    font-family: REM;
+    text-shadow: 2px 2px #000;
+    font-weight: 600;
+}
+
+.content{
+    height: 100%;
+    display: grid;
+    grid-template-rows: .5fr 1fr;
+    margin-top: 2rem;
+    margin-left: 9rem;
+    align-items: center;
+}
+
+.current-weather-container{
+    height: 100%;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: .4fr .6fr;
+}
+
+.current-weather-left{
+    grid-column: 1/2;
+    display: grid;
+    grid-template-rows: .25fr 1fr;
+}
+
+.location-container{
+    grid-column: 1/2;
+    align-items: center;
+}
+.location-container > h1{
+    font-family: REM;
+    margin:0;
+    padding: 0;
+    text-shadow: 2px 2px #000;
+    color: #fff;
+}
+.location-container > small {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+.temp-and-humidity{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: .25fr 1fr .25fr;
+    height: 100%;
+    align-items: center;
+    column-gap: 1rem;
+    color: #fff;
+}
+
+.current-temp{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    font-size: 5rem;
+    justify-self: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.wind-data{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: start;
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+.humidity{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+.feels-like{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: end;
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+.current-weather-right{
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: .25fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center;
+    margin-top: 1.25rem;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    border-left: #fff solid;
+}
+
+.rain-chance,.uv-index,.precip-in,.vis-miles,.sunrise-data,.sunset-data{
+    justify-self: start;
+}
+
+.future-weather{
+    height: 100%;
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* padding: 5rem; */
+    /* margin-top: 14rem; */
+    align-items: start;
+    justify-items: center;
+    margin-right: 9rem;
+}
+
+.future-weather > * {
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.day-of-week{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    margin-bottom: 1rem;
+}
+
+.hi-temp-f{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.lo-temp-f{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.weather-icon{
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/2;
+    grid-row: 2/4;
+    font-size: 4.5rem;
+}
+

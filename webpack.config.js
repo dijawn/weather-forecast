@@ -2,7 +2,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    index: "./src/index.js",
+  },
+  mode: "development",
   output: {
     clean: true,
     filename: "main.js",
@@ -19,7 +22,6 @@ module.exports = {
       inject: "body",
     }),
   ],
-  mode: "development",
   module: {
     rules: [
       {

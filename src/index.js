@@ -1,5 +1,6 @@
 import "./style.css";
 import UI from "./UI";
+import pageLoadBG from "./images/page-load-bg.jpg";
 
 function getLocation() {
   let location;
@@ -8,9 +9,92 @@ function getLocation() {
   return location;
 }
 
+const body = document.querySelector("body");
+
+body.style.backgroundImage = `url(${pageLoadBG})`;
+body.style.backgroundSize = "cover";
+body.style.backgroundRepeat = "no-repeat";
+
+const pageTop = document.querySelector(".page-top");
+let inputVisible = false;
+
+const searchButton = document.querySelector(".magnifying-glass");
+
+searchButton.addEventListener("click", () => {
+  const input = document.querySelector("#weather-search");
+  if (inputVisible == false) {
+    input.style.display = "grid";
+    inputVisible = true;
+  } else {
+    input.style.display = "none";
+    inputVisible = false;
+  }
+});
+
+export async function getAstronomy() {
+  try {
+    // const location = getLocation();
+    const location = "Mount Washington";
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/astronomy.json?key=08504433308d4fa184f144145232909&q=${location}`
+    );
+    const astronomyData = await response.json();
+    const astronomyObj = {
+      sunrise: astronomyData.astronomy.astro.sunrise,
+      sunset: astronomyData.astronomy.astro.sunset,
+    };
+    console.log;
+    return astronomyObj;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getForecast() {
+  try {
+    const location = "Mount Washington";
+    // const location = getLocation();
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/forecast.json?key=08504433308d4fa184f144145232909&q=${location}&days=4`
+    );
+    const forecast = await response.json();
+    const forecastObj = {
+      day_today: {
+        rain_forecast:
+          forecast.forecast.forecastday[1].day.daily_chance_of_rain,
+      },
+      day_one: {
+        date: forecast.forecast.forecastday[1].date,
+        hi_temp_f: forecast.forecast.forecastday[1].day.maxtemp_f,
+        lo_temp_f: forecast.forecast.forecastday[1].day.mintemp_f,
+        condition_text: forecast.forecast.forecastday[1].day.condition.text,
+        condition_code: forecast.forecast.forecastday[1].day.condition.code,
+      },
+      day_two: {
+        date: forecast.forecast.forecastday[2].date,
+        hi_temp_f: forecast.forecast.forecastday[2].day.maxtemp_f,
+        lo_temp_f: forecast.forecast.forecastday[2].day.mintemp_f,
+        condition: forecast.forecast.forecastday[2].day.condition.text,
+        condition_code: forecast.forecast.forecastday[2].day.condition.code,
+      },
+      day_three: {
+        date: forecast.forecast.forecastday[3].date,
+        hi_temp_f: forecast.forecast.forecastday[3].day.maxtemp_f,
+        lo_temp_f: forecast.forecast.forecastday[3].day.mintemp_f,
+        condition: forecast.forecast.forecastday[3].day.condition.text,
+        condition_code: forecast.forecast.forecastday[3].day.condition.code,
+      },
+    };
+    return forecastObj;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export async function getWeather() {
   try {
-    const location = getLocation();
+    // const location = getLocation();
+    const location = "Mount Washington";
     const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=08504433308d4fa184f144145232909&q=${location}`
     );
@@ -19,12 +103,14 @@ export async function getWeather() {
       location: {
         city: weatherReport.location.name,
         state: weatherReport.location.region,
-        time: weatherReport.location.localtime,
         country: weatherReport.location.country,
         latitude: weatherReport.location.lat,
       },
-      current_weather: {
+      current: {
+        time: weatherReport.current.last_updated,
         cloud_cover: weatherReport.current.cloud,
+        temp_f: weatherReport.current.temp_f,
+        temp_c: weatherReport.current.temp_c,
         condition: weatherReport.current.condition.text,
         feelslike_c: weatherReport.current.feelslike_c,
         feelslike_f: weatherReport.current.feelslike_f,
@@ -41,15 +127,21 @@ export async function getWeather() {
         wind_mph: weatherReport.current.wind_mph,
       },
     };
-    console.log(weatherObj);
+    return weatherObj;
   } catch (err) {
     console.log(err);
   }
 }
 
-const searchForm = document.querySelector(".weather-search");
-// searchForm.onsubmit = getWeather;
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  getWeather();
-});
+getForecast();
+getAstronomy();
+getWeather();
+UI();
+
+// const searchForm = document.querySelector(".weather-search");
+// searchForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   getAstronomy();
+//   getWeather();
+//   UI();
+// });
