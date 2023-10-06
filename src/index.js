@@ -112,7 +112,7 @@ export async function getWeather() {
 
 const searchForm = document.querySelector(".weather-search");
 
-searchForm.addEventListener("keypress", (e) => {
+document.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     getAstronomy();
@@ -120,3 +120,12 @@ searchForm.addEventListener("keypress", (e) => {
     UI();
   }
 });
+
+// searchForm.addEventListener("keypress", (e) => {
+//   if (e.key === "Enter") {
+//     e.preventDefault();
+//     getAstronomy();
+//     getWeather();
+//     UI();
+//   }
+// });
