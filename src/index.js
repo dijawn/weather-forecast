@@ -111,9 +111,12 @@ export async function getWeather() {
 }
 
 const searchForm = document.querySelector(".weather-search");
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  getAstronomy();
-  getWeather();
-  UI();
+
+searchForm.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    getAstronomy();
+    getWeather();
+    UI();
+  }
 });
