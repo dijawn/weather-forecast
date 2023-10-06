@@ -15,7 +15,8 @@ export async function getAstronomy() {
   try {
     const location = getLocation();
     const response = await fetch(
-      `https://api.weatherapi.com/v1/astronomy.json?key=08504433308d4fa184f144145232909&q=${location}`
+      `https://api.weatherapi.com/v1/astronomy.json?key=08504433308d4fa184f144145232909&q=${location}`,
+      { mode: "cors" }
     );
     const astronomyData = await response.json();
     const astronomyObj = {
@@ -33,7 +34,8 @@ export async function getForecast() {
   try {
     const location = getLocation();
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=08504433308d4fa184f144145232909&q=${location}&days=4`
+      `https://api.weatherapi.com/v1/forecast.json?key=08504433308d4fa184f144145232909&q=${location}&days=4`,
+      { mode: "cors" }
     );
     const forecast = await response.json();
     const forecastObj = {
@@ -73,7 +75,8 @@ export async function getWeather() {
   try {
     const location = getLocation();
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=08504433308d4fa184f144145232909&q=${location}`
+      `https://api.weatherapi.com/v1/current.json?key=08504433308d4fa184f144145232909&q=${location}`,
+      { mode: "cors" }
     );
     const weatherReport = await response.json();
     const weatherObj = {
