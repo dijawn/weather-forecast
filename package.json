@@ -2,7 +2,8 @@
   "name": "weather-forecast",
   "version": "1.0.0",
   "repository": {
-    "url": "git+https://github.com/dijawn/{weather-forecast.git"
+    "type": "git",
+    "url": "https://github.com/dijawn/weather-forecast.git"
   },
   "description": "",
   "main": "index.js",
