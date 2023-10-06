@@ -1,6 +1,6 @@
 import "./style.css";
 import UI from "./UI";
-import pageLoadBG from "./images/page-load-bg.jpg";
+import pageLoad from "./page-load";
 
 function getLocation() {
   let location;
@@ -9,32 +9,11 @@ function getLocation() {
   return location;
 }
 
-const body = document.querySelector("body");
-
-body.style.backgroundImage = `url(${pageLoadBG})`;
-body.style.backgroundSize = "cover";
-body.style.backgroundRepeat = "no-repeat";
-
-const pageTop = document.querySelector(".page-top");
-let inputVisible = false;
-
-const searchButton = document.querySelector(".magnifying-glass");
-
-searchButton.addEventListener("click", () => {
-  const input = document.querySelector("#weather-search");
-  if (inputVisible == false) {
-    input.style.display = "grid";
-    inputVisible = true;
-  } else {
-    input.style.display = "none";
-    inputVisible = false;
-  }
-});
+pageLoad();
 
 export async function getAstronomy() {
   try {
-    // const location = getLocation();
-    const location = "Mount Washington";
+    const location = getLocation();
     const response = await fetch(
       `http://api.weatherapi.com/v1/astronomy.json?key=08504433308d4fa184f144145232909&q=${location}`
     );
@@ -52,8 +31,7 @@ export async function getAstronomy() {
 
 export async function getForecast() {
   try {
-    const location = "Mount Washington";
-    // const location = getLocation();
+    const location = getLocation();
     const response = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=08504433308d4fa184f144145232909&q=${location}&days=4`
     );
@@ -93,8 +71,7 @@ export async function getForecast() {
 
 export async function getWeather() {
   try {
-    // const location = getLocation();
-    const location = "Mount Washington";
+    const location = getLocation();
     const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=08504433308d4fa184f144145232909&q=${location}`
     );
@@ -133,15 +110,10 @@ export async function getWeather() {
   }
 }
 
-getForecast();
-getAstronomy();
-getWeather();
-UI();
-
-// const searchForm = document.querySelector(".weather-search");
-// searchForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   getAstronomy();
-//   getWeather();
-//   UI();
-// });
+const searchForm = document.querySelector(".weather-search");
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  getAstronomy();
+  getWeather();
+  UI();
+});

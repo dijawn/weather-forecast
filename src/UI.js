@@ -14,6 +14,17 @@ export default async function UI() {
     const forecastData = await getForecast();
 
     const currentWeatherLeft = document.querySelector(".current-weather-left");
+    const currentWeatherRight = document.querySelector(
+      ".current-weather-right"
+    );
+    const futureWeather = document.querySelector(".future-weather");
+
+    if (currentWeatherLeft.hasChildNodes()) {
+      currentWeatherLeft.innerHTML = "";
+      currentWeatherRight.innerHTML = "";
+      futureWeather.innerHTML = "";
+    }
+
     const locationContainer = document.createElement("div");
     locationContainer.classList.add("location-container");
     const locationName = document.createElement("h1");
@@ -27,6 +38,8 @@ export default async function UI() {
     currentTemp.textContent = Math.floor(`${weatherData.current.temp_f}`) + "°";
     currentTemp.classList.add("current-temp");
 
+    const tempAndHumidityContainerRight = document.createElement("div");
+    tempAndHumidityContainerRight.classList.add("right");
     const humidity = document.createElement("span");
     humidity.classList.add("humidity");
     humidity.textContent = `Humidity: ${weatherData.current.humidity}` + "%";
@@ -43,19 +56,18 @@ export default async function UI() {
     locationContainer.appendChild(locationName);
     locationContainer.appendChild(locationCondition);
 
-    tempAndHumidityContainer.appendChild(feelsLike);
     tempAndHumidityContainer.appendChild(currentTemp);
-    tempAndHumidityContainer.appendChild(wind);
-    tempAndHumidityContainer.appendChild(humidity);
+    tempAndHumidityContainerRight.appendChild(feelsLike);
+    tempAndHumidityContainerRight.appendChild(wind);
+    tempAndHumidityContainerRight.appendChild(humidity);
+    tempAndHumidityContainer.appendChild(tempAndHumidityContainerRight);
 
     currentWeatherLeft.appendChild(locationContainer);
     currentWeatherLeft.appendChild(tempAndHumidityContainer);
 
-    const currentWeatherRight = document.querySelector(
-      ".current-weather-right"
-    );
     const rainIcon = document.createElement("span");
     rainIcon.classList.add("material-symbols-outlined");
+    rainIcon.classList.add("rain-chance-icon");
     rainIcon.textContent = "rainy";
     const rainChance = document.createElement("span");
     rainChance.classList.add("rain-chance");
@@ -63,6 +75,7 @@ export default async function UI() {
 
     const uvIcon = document.createElement("span");
     uvIcon.classList.add("material-symbols-outlined");
+    uvIcon.classList.add("uv-index-icon");
     uvIcon.textContent = "beach_access";
     const uvIndex = document.createElement("span");
     uvIndex.classList.add("uv-index");
@@ -70,6 +83,7 @@ export default async function UI() {
 
     const precipIcon = document.createElement("span");
     precipIcon.classList.add("material-symbols-outlined");
+    precipIcon.classList.add("precip-icon");
     precipIcon.textContent = "water_drop";
     const precipInches = document.createElement("span");
     precipInches.classList.add("precip-in");
@@ -77,6 +91,7 @@ export default async function UI() {
 
     const visibilityIcon = document.createElement("span");
     visibilityIcon.classList.add("material-symbols-outlined");
+    visibilityIcon.classList.add("vis-miles-icon");
     visibilityIcon.textContent = "visibility";
     const visibilityMiles = document.createElement("span");
     visibilityMiles.classList.add("vis-miles");
@@ -84,6 +99,7 @@ export default async function UI() {
 
     const sunriseIcon = document.createElement("span");
     sunriseIcon.classList.add("material-symbols-outlined");
+    sunriseIcon.classList.add("sunrise-icon");
     sunriseIcon.textContent = "sunny";
     const sunrise = document.createElement("span");
     sunrise.classList.add("sunrise-data");
@@ -91,6 +107,7 @@ export default async function UI() {
 
     const sunsetIcon = document.createElement("span");
     sunsetIcon.classList.add("material-symbols-outlined");
+    sunsetIcon.classList.add("sunset-icon");
     sunsetIcon.textContent = "wb_twilight";
     const sunset = document.createElement("span");
     sunset.classList.add("sunset-data");
@@ -108,8 +125,6 @@ export default async function UI() {
     currentWeatherRight.appendChild(sunrise);
     currentWeatherRight.appendChild(sunsetIcon);
     currentWeatherRight.appendChild(sunset);
-
-    const futureWeather = document.querySelector(".future-weather");
 
     const dayOneContainer = document.createElement("div");
     dayOneContainer.classList.add("day-one");
